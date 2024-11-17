@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elmore Social Feed</title>
     <style>
+        body {
+            zoom: 1.4;
+            /* 150% zoom */
+        }
+
         /* Add image size control */
         img {
             max-width: 100%;
@@ -189,14 +194,182 @@
 
         /* Top Banner */
         .banner {
-            background: linear-gradient(to bottom, #3b8be3, #2d7bd2);
             color: white;
             padding: 5px 10px;
-            border-bottom: 1px solid #1a4c94;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Updated color scheme and styling */
+        :root {
+            --primary-blue: #42b4e6;
+            --secondary-blue: #8dd8f8;
+            --light-blue: #eef9ff;
+            --border-color: #cce6f4;
+        }
+
+        body {
+            background-color: var(--light-blue);
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Banner styling */
+        .banner {
+            height: 45px;
+            padding: 5px 15px;
+        }
+
+        .site-logo {
+            width: 35px;
+            height: 35px;
+        }
+
+        .site-name {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links a {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 0 2px;
+            padding: 5px 12px;
+        }
+
+        .search-input {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            font-size: 12px;
+            padding: 4px 12px;
+            width: 180px;
+        }
+
+        /* Main container */
+        .container {
+            display: grid;
+            grid-template-columns: 220px 1fr 200px;
+            gap: 15px;
+            margin: 15px auto;
+            max-width: 1000px;
+            padding: 0 10px;
+        }
+
+        /* Left sidebar */
+        .left-sidebar {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .nav-item {
+            border-radius: 5px;
+            color: #444;
+            font-size: 13px;
+            margin: 3px 0;
+            padding: 8px 10px;
+        }
+
+        .nav-item:hover {
+            background: var(--light-blue);
+        }
+
+        /* Posts */
+        .post {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 12px;
+        }
+
+        .post-header {
+            align-items: center;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .profile-pic {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            height: 45px;
+            width: 45px;
+        }
+
+        .post-author-name {
+            color: var(--primary-blue);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .post-time {
+            color: #888;
+            font-size: 11px;
+        }
+
+        /* Right sidebar */
+        .right-sidebar {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .friend-avatar {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            height: 50px;
+            width: 50px;
+        }
+
+        /* Post creator */
+        .post-creator {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 12px;
+        }
+
+        .character-selector {
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            padding: 6px 12px;
+            width: 100%;
+        }
+
+        .post-input {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 13px;
+            margin: 10px 0;
+            min-height: 80px;
+            padding: 10px;
+            resize: none;
+            width: 100%;
+        }
+
+        .post-button {
+            background: var(--primary-blue);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 6px 15px;
         }
 
         .logo {
@@ -331,13 +504,11 @@
         }
 
         .banner {
-            background: linear-gradient(to bottom, #66b3ff, #3399ff);
             color: white;
             padding: 6px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #0066cc;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
             height: 40px;
         }
@@ -416,6 +587,7 @@
         <a href="#">FRIENDS</a>
         <a href="#">HELP</a>
     </div>
+    
     <div class="search-container">
         <input type="text" placeholder="Search" class="search-input">
     </div>
@@ -423,11 +595,13 @@
 
 <div class="container">
     <div class="left-sidebar">
-        <div class="nav-item">📝 Posts</div>
-        <div class="nav-item">📸 Photos</div>
-        <div class="nav-item">🎥 Videos</div>
-        <div class="nav-item">👥 Friends</div>
-        <div class="nav-item">🎮 Games</div>
+    </br>
+        <div class="nav-item">Messages (0)</div>
+    </br>
+        <div class="nav-item">Photos</div>
+        <img src="c:\Users\littl\Downloads\imes.png">
+        <div class="nav-item">Videos</div>
+        <img src="c:\Users\littl\Downloads\Screenshot 2024-11-17 110203.png">
     </div>
 
     <main>
@@ -448,6 +622,91 @@
 </div>
 
 <div id="feed"></div>
+
+<style>
+    .banner {
+        background-color: #74ecef;
+        height: 34px;
+        position: relative;
+        border-bottom: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .banner::after {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 0;
+        right: 0;
+        height: 24px;
+        background-color: #61affb;
+        z-index: 1;
+    }
+
+    .banner-left,
+    .nav-links,
+    .search-container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .banner-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-left: 10px;
+    }
+
+    .site-logo {
+        width: 24px;
+        height: 24px;
+        margin-top: 4px;
+    }
+
+    .site-name {
+        font-size: 16px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2px;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: bold;
+        background: none;
+    }
+
+    .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .search-container {
+        padding-right: 10px;
+    }
+
+    .search-input {
+        height: 18px;
+        width: 450px;
+        border: 2px solid #33CC33;
+        border-radius: 2px;
+        padding: 0 10px;
+        font-size: 12px;
+        background: white;
+    }
+
+    /* Update container layout */
+    .container {
+        margin-top: 0;
+    }
+</style>
 
 <script>
     const characters = [
@@ -485,7 +744,7 @@
             name: 'Nicole',
             color: '#4299e1',
             personality: 'determined',
-            profilePic: 'https://i.pinimg.com/236x/b8/c2/f6/b8c2f6fe0cd174bb95da6aaf5f6dfbb4.jpg?nii=t'
+            profilePic: 'nicole.png'
         },
         {
             name: 'Richard',
@@ -503,7 +762,7 @@
             name: 'Rocky',
             color: '#dd6b20',
             personality: 'easygoing',
-            profilePic: 'https://vignette.wikia.nocookie.net/theamazingworldofgumball/images/e/ed/Shippening51.png/revision/latest/scale-to-width-down/300?cb=20180426020655'
+            profilePic: 'rocky.png'
         },
         {
             name: 'Tobias',
@@ -525,28 +784,137 @@
             "Just crushed it at basketball! I mean, no one else was playing, but still... 🏀",
             "Looking for new members for my fan club! Any takers? 🌟",
             "Sometimes I think I'm too awesome for this school. 😎",
+            "New personal record: 12 selfies in 30 seconds. Beat that! 📸",
+            "Thinking of starting my own podcast. Title ideas? ‘The Tobias Show’? 🎙️",
+            "I just invented a new dance move. It’s called ‘The Tobinator.’ 💃",
+            "Who needs homework when you’re already perfect? ✏️❌",
+            "It’s hard being so talented, but someone’s gotta do it. 🤷‍♂️",
+            "If anyone needs life advice, I’m always available. For a fee. 💵",
+            "Sometimes I get bored of winning all the time. 🎉",
+            "My reflection said hello today. I think it’s finally catching on.",
+            "Just ate an entire pizza by myself. Absolute champion.",
+            "I tried humility once. Didn’t like it.",
+            "Why be good at one thing when I can be great at everything?",
+            "Note to self: Host an event called ‘Tobias Appreciation Day.’",
+            "Every time I walk into a room, I feel like the party just got better.",
+            "I’m pretty sure my laugh is contagious.",
+            "Anyone else feel like the world revolves around them, or is it just me?",
+            "I may not be perfect, but I’m pretty close.",
+            "Confidence isn’t something I have. It’s who I am."
         ],
 
         'Nicole': [
             "Just finished my morning workout. Time to tackle the day! 💪",
             "Sometimes I wonder if this family will ever learn to keep the house clean... 🧹",
+            "Being a mom is like being a superhero without the cape. 🦸‍♀️",
+            "How do socks keep disappearing? I swear there’s a sock-eating monster in the house! 🧦",
+            "Managed to juggle work, family, and fitness today. I should get a medal. 🥇",
+            "These kids will drive me insane, but I love them anyway. ❤️",
+            "Why can’t they make a coffee strong enough to handle this family? ☕",
+            "If only cleaning the house could be considered cardio... 🤔",
+            "Being a mom means having snacks in my bag at all times. 🍎",
+            "Did I just find gum in the couch? Seriously? 😤",
+            "No one said being the best at everything was easy.",
+            "Sometimes, yelling is the only way to get heard in this madhouse.",
+            "Multitasking level: expert. Folding laundry while on a conference call.",
+            "Working hard isn’t just a habit; it’s my lifestyle.",
+            "My to-do list is longer than a CVS receipt.",
+            "Note to self: Teach the kids to clean up after themselves. Again.",
+            "If I had a dollar for every time I said 'clean your room,' I’d be rich.",
+            "I’ve got a million things to do, and I’ll probably finish them all.",
+            "Laundry, dishes, repeat. That’s my life right now.",
+            "Sometimes I think I need a vacation from my vacation planning."
         ],
+
         'Richard': [
             "Anyone know what's for dinner? I'm getting hungry... 🍕",
             "Found a really comfortable spot on the couch today! 🛋️",
+            "If napping were an Olympic sport, I’d have gold by now. 🥇",
+            "Breakfast for dinner? Yes, please! 🥞",
+            "I may not do much, but I do it in style. 😎",
+            "Saturdays are for cereal and cartoons. 🍳",
+            "Managed to finish an entire pizza by myself. My hero’s journey is complete. 🍕",
+            "No one loves snacks more than I do. Fight me. 🍩",
+            "Thinking about inventing a holiday dedicated to laziness. 😌",
+            "The couch and I have an unbreakable bond. 🛋️",
+            "Today’s agenda: nothing.",
+            "It’s not procrastination if you’re enjoying it.",
+            "I consider myself an expert in relaxation techniques.",
+            "Life’s too short to stress about the small stuff.",
+            "I keep forgetting what I’m supposed to remember.",
+            "Is it possible to be full and hungry at the same time?",
+            "Sleeping is my superpower.",
+            "Why walk when you can roll?",
+            "I firmly believe leftovers are a meal plan.",
+            "Don’t underestimate the value of a good nap."
         ],
         'Gumball': [
-            "Got detention again. At least I can use the time to figure out my next big plan.",
+            "Got detention again. At least I can use the time to figure out my next big plan. 🤔",
             "Something tells me today’s going to be one of those days. I’ll probably get into trouble... again. 🤦‍♂️",
-
+            "I tried being responsible for five minutes. It didn’t work. 😂",
+            "Why does weird stuff always happen to me? Seriously. 🌀",
+            "Thinking of making a list of all my bad ideas. It’s going to be a long list. 📝",
+            "Accidentally turned a small problem into a big one today. Oops. 😅",
+            "I can’t decide if I’m a genius or just really lucky. 💡",
+            "Life’s too short to follow the rules. 🤷‍♂️",
+            "Darwin said I should apologize. I’ll do it… eventually. 🤔",
+            "Being a troublemaker is a full-time job. 💼",
+            "Sometimes I feel like everyone is out to get me.",
+            "I’m not saying I’m unlucky, but bad things happen when I’m around.",
+            "Why is it always MY fault?",
+            "The principal says I’m ‘creative.’ I think that’s code for ‘trouble.’",
+            "I was going to do my homework, but then I got distracted.",
+            "Darwin told me to think before I act. I don’t have time for that.",
+            "I’m not lazy; I’m just conserving energy.",
+            "One day, I’ll have a good idea. Today is not that day.",
+            "Rules are just suggestions, right?",
+            "I think I’ve reached my quota of bad ideas for the week."
         ],
+
         'Darwin': [
             "I've been trying to be a better person lately. It’s not always easy, but I think it’s worth it. 🐟",
             "Gumball, I don’t know if this is such a good idea. I just don’t want to get caught in another mess. 😅",
+            "Helping others makes me feel happy. I wish I could do it all the time. 😊",
+            "Sometimes I wonder what it would be like to be a real fish. 🐠",
+            "I think I’ve been too nice lately. Maybe I should try being a little selfish. 🤔",
+            "The best part of the day is when everyone gets along. 🥰",
+            "I’ve got a new goal: Stay out of trouble for an entire day. Let’s see how it goes. 🚫",
+            "Is it weird that I’m afraid of getting in trouble, even when I didn’t do anything? 😳",
+            "I’ve been trying to learn something new every day. Today, I learned patience. 🕊️",
+            "The world is so big. I wonder how much of it I’ll get to see. 🌍",
+            "I’m starting to think Gumball’s plans aren’t always the best.",
+            "Being nice is harder than it looks.",
+            "I don’t want to let anyone down, but sometimes it feels like too much.",
+            "I tried standing up for myself today. It felt good.",
+            "Some days, I just want to relax and do nothing.",
+            "I think I’m better at listening than talking.",
+            "Gumball says I worry too much. Maybe he’s right.",
+            "How do you know when you’re doing the right thing?",
+            "I love my family, even when they drive me crazy.",
+            "I think I’m starting to figure out who I really am."
         ],
+
         'Anais': [
             "I’ve been thinking about how to solve this problem. Maybe if I break it down into smaller parts... 🤓",
             "Just finished another physics chapter. I know it’s not everyone’s thing, but I need to stay ahead. 📚",
+            "Sometimes it feels like I’m the only responsible one in this family. 🧹",
+            "I started a new project today. Can’t wait to see how it turns out! 🛠️",
+            "Knowledge is power. I think I’ve got a lot of both. 💡",
+            "Gumball and Darwin keep getting into trouble. I guess I’ll have to fix it again. 😤",
+            "I’ve been working on my chess strategy. My goal is to never lose. ♟️",
+            "They say curiosity killed the cat, but I think it just made me smarter. 🐾",
+            "Just had an idea for a new invention. Now to figure out how to build it... 🔧",
+            "Being the smartest one in the room is a blessing and a curse. 🧠",
+            "Sometimes I wish people would listen to me more.",
+            "I’m not bossy; I just know what’s best.",
+            "School is easy, but dealing with my brothers is a challenge.",
+            "Why is it so hard to get people to take me seriously?",
+            "I’m not trying to be a perfectionist. It just happens.",
+            "I don’t have time for nonsense. There’s work to be done.",
+            "If I ran the world, everything would be so much better.",
+            "I love learning new things. It’s like unlocking a new superpower.",
+            "Why do people always underestimate me? I’ll show them.",
+            "I don’t just want to be smart; I want to make a difference."
         ],
         'Penny': [
             "Cheerleading practice was great today, but I’ve got some ideas to make our routine even better. 🤸‍♀️",
@@ -554,35 +922,208 @@
             "Been experimenting with shape-shifting a bit. I’ve got a few goals I want to reach before I can really impress everyone. ✨",
             "I feel like I’m getting better every day, but there’s always room for improvement. 🌱",
             "Sometimes I wonder if I’m trying too hard to keep everything balanced. I guess I’ll figure it out. ⚖️",
+            "Helping others makes me feel more like myself. It’s such a rewarding feeling. 💖",
+            "A little encouragement goes a long way. Remember that when you’re cheering someone on. 🎉",
+            "I’m proud of what I’ve accomplished, but there’s still so much I want to do. 🌟",
+            "Even when things get tough, I try to see the silver lining. ☀️",
+            "Cheerleading isn’t just about routines. It’s about lifting everyone’s spirits. 🥰",
+            "Not every problem can be solved by trying harder.",
+            "Sometimes I feel like people expect me to be perfect all the time.",
+            "I love what I do, but I wish I had more time for myself.",
+            "Shape-shifting isn’t as easy as it looks, but it’s worth it.",
+            "Some days, I feel like I’m being pulled in a million directions.",
+            "Why is it so hard to make everyone happy?",
+            "The best part of the day is when everyone feels included.",
+            "I’m not afraid of hard work. I just wish it didn’t feel so overwhelming sometimes.",
+            "Every day is a chance to grow and learn something new.",
+            "Balancing everything is tough, but I know I can handle it."
         ],
+
         'Banana Joe': [
             "I know I’m a banana, but that doesn’t mean I’m not thinking about my future. Maybe a career in comedy? 🍌",
             "You ever feel like life’s a joke? Sometimes I think I’m the punchline. 😂",
-            "I think I could actually learn a few new tricks… no more slipping on bananas. Time for an upgrade.",
+            "I think I could actually learn a few new tricks… no more slipping on bananas. Time for an upgrade. 🛠️",
+            "If laughter is the best medicine, then I’m the doctor. 🩺",
+            "Life’s too short to be serious all the time. Let’s laugh more! 🤣",
+            "Ever wonder what a banana thinks about? Probably not, but here I am. 🤔",
+            "Sometimes I feel like people only see me as a walking fruit joke. 🍍",
+            "My goal in life is to make everyone laugh at least once. 🎭",
+            "If I could have one superpower, it’d be the ability to make anyone laugh instantly. 💥",
+            "Being a banana isn’t easy, but it sure is fun. 🌟",
+            "Not every joke lands, but that’s what makes it funny.",
+            "Do you ever feel like people don’t get your sense of humor?",
+            "I tried being serious once. It didn’t suit me.",
+            "Comedy is harder than it looks, but it’s worth it.",
+            "I love making people laugh, even if it means being silly.",
+            "Why do people always expect me to slip on a peel?",
+            "Sometimes I feel like the joke’s on me, but that’s okay.",
+            "The best moments are the ones where everyone’s laughing together.",
+            "I think humor can solve almost any problem.",
+            "If you’re not laughing, are you really living?"
         ],
+
         'Principal Brown': [
             "Reminder: Running in the halls is strictly prohibited! 🏃‍♂️❌",
             "Another day, another series of inexplicable incidents to investigate... 🔍",
+            "Sometimes I feel like I’m the only one holding this school together. 🏫",
+            "No, I will not allow another prank war in the cafeteria. 😤",
+            "Keeping order is a thankless job, but someone has to do it. 📋",
+            "Please remember to respect school property. That includes the vending machines. 🥤",
+            "If I hear one more ‘Principal Frown’ joke, I might just lose it. 😒",
+            "Discipline is about more than punishment. It’s about growth. 🌱",
+            "My job isn’t just to enforce rules. It’s to help students thrive. 📖",
+            "School safety is my top priority. Let’s all work together to keep it that way. 🛡️",
+            "Sometimes I wonder if anyone actually reads the school handbook.",
+            "Why does everyone think being principal is so easy?",
+            "I didn’t sign up for this much chaos, but here we are.",
+            "I take my job seriously, even if no one else does.",
+            "The best part of my day is when the halls are quiet.",
+            "Rules are there for a reason. I wish more people understood that.",
+            "I’m not here to be liked. I’m here to keep things running smoothly.",
+            "Some days, I feel like I’m fighting a losing battle.",
+            "Respect is a two-way street. Let’s all try to remember that.",
+            "I’ll admit, sometimes even I have to laugh at the chaos."
         ],
+
         'Rocky': [
             "Just made lunch extra special today! Added some love to the mystery meat! 🍖",
             "Cleaning the halls while practicing my air guitar! 🎸",
             "Best part of being a janitor? I get to jam while I work! 🎵",
+            "Lunch duty isn’t glamorous, but someone’s gotta do it. 💪",
+            "The mop and I are best friends. We go way back. 🧹",
+            "I may be a janitor, but I’m also a rock star at heart. 🤘",
+            "Every day is a chance to make the school a little brighter. 🌟",
+            "Music makes everything better, even cleaning. 🎶",
+            "I like to think of my job as making magic happen behind the scenes. 🪄",
+            "If anyone needs me, I’ll be in the supply closet perfecting my drum solo. 🥁",
+            "People don’t realize how much work goes into keeping this place running.",
+            "The best part of my job is seeing everyone happy and safe.",
+            "Sometimes I wish people noticed the little things I do.",
+            "Being a janitor isn’t glamorous, but it’s honest work.",
+            "I’ve got a talent for turning chaos into order.",
+            "My job might not be flashy, but it’s important.",
+            "I take pride in making the school a better place.",
+            "Cleaning is therapeutic in its own way.",
+            "Every spill is just another challenge to conquer.",
+            "I like to think I’m the unsung hero of the school."
         ],
+
         'Mr Small': [
             "Just finished a two-hour meditation session in my office. Found inner peace and my missing sandwich! 🧘‍♂️",
             "Remember kids: The universe is listening... and it's probably just as confused as you are! 🌌",
             "Hosting a new age healing workshop! Bring your own crystals! 💎",
+            "Sometimes I feel like I’m the only one who truly understands the universe. ✨",
+            "If everyone just took a moment to breathe, the world would be a better place. 🌬️",
+            "Peace, love, and harmony. That’s all I want for everyone. ❤️",
+            "The answers you seek are within you. Just look deep enough. 🪞",
+            "Let go of negativity, and embrace your inner light. 🌟",
+            "I believe in the power of positive energy. Let’s all share some today. ✌️",
+            "Remember: Every day is a chance to grow spiritually. 🌱",
+            "Not everyone understands my methods, but that’s okay.",
+            "I don’t need material things to be happy.",
+            "Meditation is my escape from the chaos of life.",
+            "I wish more people took time to reflect on their actions.",
+            "Sometimes I think I care too much about helping others.",
+            "The universe has a plan for all of us. Trust the process.",
+            "I find joy in the little things, like a good cup of herbal tea.",
+            "Being at peace with yourself is the greatest achievement.",
+            "I may seem strange to some, but I know who I am.",
+            "My goal is to leave the world a little better than I found it."
         ]
     };
 
 
+
     const responses = [
+        "Really? That's the best you can do? 🙄",
+        "Yikes, that was embarrassing. 😬",
+        "You're hopeless. 😂",
+        "Wow, groundbreaking... not. 🙃",
+        "Congratulations, you played yourself. 👏",
+        "Is this supposed to impress me?",
+        "Seriously? Just stop.",
+        "Well, that was a waste of time.",
+        "Maybe think twice next time.",
+        "Did you even try?",
+
         "Dude, that's awesome! 🎉",
         "Count me in! 🙌",
         "Not again... 🤦‍♂️",
         "This is going to be epic! 🚀",
         "I know exactly what you mean 😂",
+        "Great idea, let's do it! 🙏",
+        "Sounds good to me! 👍",
+        "I'm all for it. 😊",
+        "Absolutely, I'm in! 👌",
+        "Let’s make it happen. 🌟",
+        "That sounds perfect. 🥳",
+        "No problem, I got this! 💪",
+        "Let me know what you need. 💬",
+        "I’m here if you need help. 🤗",
+        "Sounds like a solid plan to me. 💡",
+        "Dude, that's awesome!",
+        "Count me in!",
+        "Not again...",
+        "This is going to be epic!",
+        "I know exactly what you mean.",
+        "Great idea, let's do it.",
+        "Sounds good to me.",
+        "I'm all for it.",
+        "Absolutely, I'm in.",
+        "Let’s make it happen.",
+        "That sounds perfect.",
+        "No problem, I got this!",
+        "Let me know what you need.",
+        "I’m here if you need help.",
+        "Sounds like a solid plan to me.",
+        "Agreed, let’s move forward.",
+        "Yes, I completely agree!",
+        "I’ll take care of it, no worries.",
+        "This makes total sense to me.",
+        "I'm on board with this idea.",
+
+        "LOL, what even was that? 🤣",
+        "Well, that escalated quickly. 😂",
+        "I can’t stop laughing, help! 😭",
+        "Plot twist! 🤯",
+        "I didn’t see that coming. 😅",
+        "Okay, now this is comedy gold. 💀",
+        "That’s one way to do it, I guess. 🤷",
+        "Cue the dramatic music! 🎶",
+        "Someone call Hollywood, we have a script! 🎥",
+        "I’m adding this to my list of regrets. 😂",
+        "Do I even want to know? 🧐",
+        "We’re officially in the Twilight Zone. 🎢",
+        "Brace yourself, chaos is coming. 🌀",
+        "I’m crying, but in a good way. 😂",
+        "That was legendary. 😂",
+        "LOL, what even was that?",
+        "Well, that escalated quickly.",
+        "I can’t stop laughing, help!",
+        "Plot twist!",
+        "I didn’t see that coming.",
+        "Okay, now this is comedy gold.",
+        "That’s one way to do it, I guess.",
+        "Cue the dramatic music!",
+        "Someone call Hollywood, we have a script!",
+        "I’m adding this to my list of regrets.",
+        "Do I even want to know?",
+        "We’re officially in the Twilight Zone.",
+        "Brace yourself, chaos is coming.",
+        "I’m crying, but in a good way.",
+        "That was legendary.",
+
+        "Are we sure this is a good idea? 🤔",
+        "Why does this always happen to me? 😩",
+        "Can we actually pull this off? 🤷‍♂️",
+        "Is this really the best approach? 🙄",
+        "Why is everything so complicated? 😅",
+        "Should I be worried about this? 😳",
+        "Is this how it's supposed to work? 🤔",
+        "Do you think we’re making a mistake here? 🤨",
+        "Why does this feel like it's going to end badly? 😬",
+        "How did we get ourselves into this mess? 😅",
+
     ];
 
 
