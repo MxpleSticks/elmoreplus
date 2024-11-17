@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elmore Social Feed</title>
+    <style>
+        /* Add image size control */
+        img {
+            max-width: 100%;
+            max-height: 300px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .profile-pic,
+        .comment-pic,
+        .friend-avatar {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .character-selector {
+            margin-bottom: 12px;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .post-creator {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            width: 500px;
+        }
+
+        .post-input {
+            width: 100%;
+            border: none;
+            resize: none;
+            font-size: 16px;
+            min-height: 100px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+
+        .post-button {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            float: right;
+        }
+
+        #feed {
+            width: 500px;
+        }
+
+        .post {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+
+        .post-author-name {
+            font-weight: 600;
+        }
+
+        .post-time {
+            color: #65676b;
+            font-size: 12px;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #e5e5e5;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .post-action {
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .friend-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .post-as {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 8px;
+        }
+
+        .post-as label {
+            font-weight: 600;
+        }
+
+
+        /* Previous CSS remains the same */
+        .character-selector {
+            margin-bottom: 12px;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        .post-as {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 8px;
+        }
+
+        .post-as label {
+            font-weight: 600;
+        }
+
+        body {
+            background-color: #eef6ff;
+            font-family: "Lucida Grande", "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top Banner */
+        .banner {
+            background: linear-gradient(to bottom, #3b8be3, #2d7bd2);
+            color: white;
+            padding: 5px 10px;
+            border-bottom: 1px solid #1a4c94;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Main Layout */
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Left Sidebar */
+        .left-sidebar {
+            background: white;
+            border-radius: 5px;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .nav-item {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: #f0f2f5;
+        }
+
+        /* Main Content */
+        .post-creator {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .post-input {
+            width: 100%;
+            min-height: 80px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 10px;
+            margin: 10px 0;
+            resize: none;
+        }
+
+        .post-button {
+            background: linear-gradient(to bottom, #4c8fea, #3b7fd9);
+            color: white;
+            border: 1px solid #2d6bc7;
+            padding: 6px 15px;
+            border-radius: 3px;
+            float: right;
+            cursor: pointer;
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            background: white;
+            border-radius: 5px;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .friend-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .friend-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+        }
+
+        /* Posts Feed */
+        .post {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+        }
+
+        .character-selector {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+
+        .banner {
+            background: linear-gradient(to bottom, #66b3ff, #3399ff);
+            color: white;
+            padding: 6px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0066cc;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            height: 40px;
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .site-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+        }
+
+        .site-name {
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a.active {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-input {
+            padding: 4px 8px;
+            border: 1px solid #0066cc;
+            border-radius: 3px;
+            font-size: 12px;
+            width: 200px;
+        }
+
+        .search-icon {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+
+<div class="banner">
+    <div class="banner-left">
+        <img src="logo.png" alt="ElmorePlus Logo" class="site-logo">
+        <div class="site-name">ElmorePlus</div>
+    </div>
+    <div class="nav-links">
+        <a href="#" class="active">HOME</a>
+        <a href="#">MY ACCOUNT</a>
+        <a href="#">CHAT</a>
+        <a href="#">FRIENDS</a>
+        <a href="#">HELP</a>
+    </div>
+    <div class="search-container">
+        <input type="text" placeholder="Search" class="search-input">
+    </div>
+</div>
+
+<div class="container">
+    <div class="left-sidebar">
+        <div class="nav-item">📝 Posts</div>
+        <div class="nav-item">📸 Photos</div>
+        <div class="nav-item">🎥 Videos</div>
+        <div class="nav-item">👥 Friends</div>
+        <div class="nav-item">🎮 Games</div>
+    </div>
+
+    <main>
+        <div class="post-creator">
+            <select class="character-selector" id="character-select">
+                <option value="user">Post as...</option>
+            </select>
+            <textarea class="post-input" placeholder="What's on your mind?"></textarea>
+            <button class="post-button">Share</button>
+        </div>
+        <div id="feed"></div>
+    </main>
+
+    <div class="right-sidebar">
+        <h3>Friends Online</h3>
+        <div id="friends" class="friend-list"></div>
+    </div>
+</div>
+
+<div id="feed"></div>
+
+<script>
+    const characters = [
+        {
+            name: 'Gumball',
+            color: '#3b82f6',
+            personality: 'mischievous',
+            profilePic: 'https://static.wikia.nocookie.net/fb34cb18-6024-46a6-86e0-e3db28f89dc2' // Add profile picture URL here
+        },
+        {
+            name: 'Darwin',
+            color: '#22c55e',
+            personality: 'innocent',
+            profilePic: 'https://vignette.wikia.nocookie.net/theamazingworldofgumball/images/1/1b/HEAD_DARWIN.png/revision/latest?cb=20170731193530' // Add profile picture URL here
+        },
+        {
+            name: 'Anais',
+            color: '#ec4899',
+            personality: 'intelligent',
+            profilePic: 'https://2.bp.blogspot.com/-QgQw0Ky-E-0/VzD9Zip6_II/AAAAAAAA_-U/rzbde2BD2G0GOf92evx1bqkTmpf8D7jQgCKgB/s1600/baby_anais_by_wildstar27-d81jmz0.png' // Add profile picture URL here
+        },
+        {
+            name: 'Penny',
+            color: '#f59e0b',
+            personality: 'kind',
+            profilePic: 'https://vignette1.wikia.nocookie.net/theamazingworldofgumball/images/4/4e/Season_1_Penny.png/revision/latest?cb=20170408152944' // Add profile picture URL here
+        },
+        {
+            name: 'Banana Joe',
+            color: '#fbbf24',
+            personality: 'silly',
+            profilePic: 'https://www.nicepng.com/png/detail/115-1152366_banana-joe-o-incrivel-mundo-de-gumball-joo.png' // Add profile picture URL here
+        },
+        {
+            name: 'Nicole',
+            color: '#4299e1',
+            personality: 'determined',
+            profilePic: 'https://i.pinimg.com/236x/b8/c2/f6/b8c2f6fe0cd174bb95da6aaf5f6dfbb4.jpg?nii=t'
+        },
+        {
+            name: 'Richard',
+            color: '#ed64a6',
+            personality: 'carefree',
+            profilePic: 'https://img.itch.zone/aW1nLzEzNDgwMTQxLmpwZw==/original/CwDvGE.jpg'
+        },
+        {
+            name: 'Principal Brown',
+            color: '#975a16',
+            personality: 'authoritative',
+            profilePic: 'https://assets.mycast.io/characters/principal-brown-9436354-normal.jpg?1671711007'
+        },
+        {
+            name: 'Rocky',
+            color: '#dd6b20',
+            personality: 'easygoing',
+            profilePic: 'https://vignette.wikia.nocookie.net/theamazingworldofgumball/images/e/ed/Shippening51.png/revision/latest/scale-to-width-down/300?cb=20180426020655'
+        },
+        {
+            name: 'Tobias',
+            color: '#805ad5',
+            personality: 'overconfident',
+            profilePic: 'https://64.media.tumblr.com/817f668b72a47695e922a09e98ecf8a6/564c994fd153fa1c-2b/s250x400/0a435fa456822cb23863ce1915724a34e4736e87.jpg'
+        },
+        {
+            name: 'Mr Small',
+            color: '#319795',
+            personality: 'spiritual',
+            profilePic: 'https://i.pinimg.com/originals/98/f9/b9/98f9b9e3ede65bb5029fb9e23774073d.png'
+        }
+
+    ];
+
+    const characterPosts = {
+        'Tobias': [
+            "Just crushed it at basketball! I mean, no one else was playing, but still... 🏀",
+            "Looking for new members for my fan club! Any takers? 🌟",
+            "Sometimes I think I'm too awesome for this school. 😎",
+        ],
+
+        'Nicole': [
+            "Just finished my morning workout. Time to tackle the day! 💪",
+            "Sometimes I wonder if this family will ever learn to keep the house clean... 🧹",
+        ],
+        'Richard': [
+            "Anyone know what's for dinner? I'm getting hungry... 🍕",
+            "Found a really comfortable spot on the couch today! 🛋️",
+        ],
+        'Gumball': [
+            "Got detention again. At least I can use the time to figure out my next big plan.",
+            "Something tells me today’s going to be one of those days. I’ll probably get into trouble... again. 🤦‍♂️",
+
+        ],
+        'Darwin': [
+            "I've been trying to be a better person lately. It’s not always easy, but I think it’s worth it. 🐟",
+            "Gumball, I don’t know if this is such a good idea. I just don’t want to get caught in another mess. 😅",
+        ],
+        'Anais': [
+            "I’ve been thinking about how to solve this problem. Maybe if I break it down into smaller parts... 🤓",
+            "Just finished another physics chapter. I know it’s not everyone’s thing, but I need to stay ahead. 📚",
+        ],
+        'Penny': [
+            "Cheerleading practice was great today, but I’ve got some ideas to make our routine even better. 🤸‍♀️",
+            "It’s nice to have a moment to laugh with you all, but there’s work to be done too, you know. 💪",
+            "Been experimenting with shape-shifting a bit. I’ve got a few goals I want to reach before I can really impress everyone. ✨",
+            "I feel like I’m getting better every day, but there’s always room for improvement. 🌱",
+            "Sometimes I wonder if I’m trying too hard to keep everything balanced. I guess I’ll figure it out. ⚖️",
+        ],
+        'Banana Joe': [
+            "I know I’m a banana, but that doesn’t mean I’m not thinking about my future. Maybe a career in comedy? 🍌",
+            "You ever feel like life’s a joke? Sometimes I think I’m the punchline. 😂",
+            "I think I could actually learn a few new tricks… no more slipping on bananas. Time for an upgrade.",
+        ],
+        'Principal Brown': [
+            "Reminder: Running in the halls is strictly prohibited! 🏃‍♂️❌",
+            "Another day, another series of inexplicable incidents to investigate... 🔍",
+        ],
+        'Rocky': [
+            "Just made lunch extra special today! Added some love to the mystery meat! 🍖",
+            "Cleaning the halls while practicing my air guitar! 🎸",
+            "Best part of being a janitor? I get to jam while I work! 🎵",
+        ],
+        'Mr Small': [
+            "Just finished a two-hour meditation session in my office. Found inner peace and my missing sandwich! 🧘‍♂️",
+            "Remember kids: The universe is listening... and it's probably just as confused as you are! 🌌",
+            "Hosting a new age healing workshop! Bring your own crystals! 💎",
+        ]
+    };
+
+
+    const responses = [
+        "Dude, that's awesome! 🎉",
+        "Count me in! 🙌",
+        "Not again... 🤦‍♂️",
+        "This is going to be epic! 🚀",
+        "I know exactly what you mean 😂",
+    ];
+
+
+
+    // Add characters to selector
+    const characterSelect = document.getElementById('character-select');
+    characters.forEach(character => {
+        const option = document.createElement('option');
+        option.value = character.name;
+        option.textContent = character.name;
+        characterSelect.appendChild(option);
+    });
+
+    function getProfilePic(name) {
+        const character = characters.find(c => c.name === name);
+        if (character && character.profilePic) {
+            return character.profilePic;
+        }
+        return createPlaceholderImage(40, 40, name.charAt(0));
+    }
+
+    function createPlaceholderImage(width, height, text) {
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = getRandomColor();
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.fillStyle = '#000';
+        ctx.font = '14px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, width / 2, height / 2);
+
+        return canvas.toDataURL();
+    }
+    function getRandomColor() {
+        return `hsl(${Math.random() * 360}, 70%, 80%)`;
+    }
+
+    function createPost(content, author) {
+        const isUser = author === 'user';
+        const post = {
+            author: isUser ? { name: 'You', color: '#1877f2' } : characters.find(c => c.name === author),
+            content: content,
+            timestamp: 'Just now',
+            likes: 0,
+            comments: []
+        };
+
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
+        postElement.innerHTML = `
+                <div class="post-header">
+                    <img src="${isUser ? createPlaceholderImage(40, 40, 'Y') : getProfilePic(post.author.name)}" 
+                         alt="${post.author.name}" class="profile-pic">
+                    <div class="post-author">
+                        <div class="post-author-name">${post.author.name}</div>
+                        <div class="post-time">Posted ${post.timestamp}</div>
+                    </div>
+                </div>
+                <div class="post-content">${content}</div>
+                <div class="post-actions">
+                    <button class="post-action like-button">
+                        <span>👍</span> <span class="like-count">${post.likes}</span>
+                    </button>
+                    <button class="post-action comment-button">
+                        💭 Comment
+                    </button>
+                    <button class="post-action">
+                        ⭐ Share
+                    </button>
+                </div>
+                <div class="comments-section"></div>
+            `;
+
+        const likeButton = postElement.querySelector('.like-button');
+        const likeCount = postElement.querySelector('.like-count');
+        likeButton.addEventListener('click', () => {
+            const currentLikes = parseInt(likeCount.textContent);
+            likeCount.textContent = currentLikes + 1;
+        });
+
+        // Add automatic responses
+        const numberOfResponses = Math.floor(Math.random() * 3) + 1;
+        for (let i = 0; i < numberOfResponses; i++) {
+            setTimeout(() => {
+                let commenter;
+                do {
+                    commenter = characters[Math.floor(Math.random() * characters.length)];
+                } while (commenter.name === author);
+
+                const response = responses[Math.floor(Math.random() * responses.length)];
+                const commentHTML = `
+                        <div class="comment">
+                            <div class="comment-header">
+                                <img src="${getProfilePic(commenter.name)}" alt="${commenter.name}" class="comment-pic">
+                                <span class="comment-author">${commenter.name}</span>
+                                <span class="comment-time">Just now</span>
+                            </div>
+                            <div class="comment-content">${response}</div>
+                        </div>
+                    `;
+                postElement.querySelector('.comments-section').innerHTML += commentHTML;
+            }, (i + 1) * 1000 + Math.random() * 1000);
+        }
+
+        const feed = document.getElementById('feed');
+        feed.insertBefore(postElement, feed.firstChild);
+    }
+
+    // Initialize friends
+    const friendsContainer = document.getElementById('friends');
+    characters.forEach(character => {
+        const img = document.createElement('img');
+        img.src = getProfilePic(character.name);
+        img.alt = character.name;
+        img.className = 'friend-avatar';
+        img.title = character.name;
+        friendsContainer.appendChild(img);
+    });
+
+    // Set up post creation
+    const postInput = document.querySelector('.post-input');
+    const postButton = document.querySelector('.post-button');
+
+    postButton.addEventListener('click', () => {
+        const content = postInput.value.trim();
+        const selectedCharacter = characterSelect.value;
+        if (content) {
+            createPost(content, selectedCharacter);
+            postInput.value = '';
+        }
+    });
+
+    // Allow posting with Enter key (Shift+Enter for new line)
+    postInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            postButton.click();
+        }
+    });
+
+    // Automatic character posts
+    function createRandomCharacterPost() {
+        const character = characters[Math.floor(Math.random() * characters.length)];
+        const posts = characterPosts[character.name];
+        const content = posts[Math.floor(Math.random() * posts.length)];
+        createPost(content, character.name);
+    }
+
+    // Create initial character posts
+    for (let i = 0; i < 3; i++) {
+        createRandomCharacterPost();
+    }
+
+    // Add new character posts periodically
+    setInterval(createRandomCharacterPost, 20000); // New post every 20 seconds
+</script>
+</body>
+
+</html>
